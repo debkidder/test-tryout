@@ -6,11 +6,11 @@ import java.awt.event.*;
 import java.util.Arrays;
 
 public class Login extends JPanel implements ActionListener {
-	private static String OK = "ok";
-	private JFrame controllingFrame;
-	private JTextField loginField;
-	private JPasswordField passwordField;
-	private JTextField hiddenField;
+	public static String OK = "ok";
+	public JFrame controllingFrame;
+	public JTextField loginField;
+	public JPasswordField passwordField;
+	public JTextField hiddenField;
 
 	public Login(JFrame f) {
 		loginField = new JTextField(10);
@@ -75,8 +75,8 @@ public class Login extends JPanel implements ActionListener {
 					JOptionPane.showMessageDialog(controllingFrame, "Successful!");
 				}
 			} else if (isLoginEmpty(input2)) { 
-				JOptionPane.showMessageDialog(controllingFrame, "Please enter a username and password.", // change to
-																											// use name
+				JOptionPane.showMessageDialog(controllingFrame, "Please enter a username and password.", 
+																											
 						"Error_", 
 						JOptionPane.ERROR_MESSAGE);
 			}
@@ -89,18 +89,19 @@ public class Login extends JPanel implements ActionListener {
 		}
 	}
 
-	private static boolean isLoginCorrect(String input2) {
+	//should this really be static if I'm returning something? seems standard tho...hmmm
+	public static boolean isLoginCorrect(String input2) {
 		boolean isLoginCorrect = true;
-		String correctLogin = "Ted";
+///		String correctLogin = "la dee da";
 
-		// (OK) Accepts Ted (OK)
-		// (OK) Accepts ted (OK)
-		// (OK) Accepts TED (OK)
+		// (OK) Accepts Spud (OK)
+		// (OK) Accepts spud (OK)
+		// (OK) Accepts SPUD (OK)
 		// (Intentional BUG) Accepts empty // I just added this bug, so I'll eventually change code below
 		// (Intentional BUG) Accepts anything that starts with Ted, like Teddy
-		// (Intentional BUG) Not handling this a standard way, so rejects other case variations (tED, teD, tEd, etc.)
+		// (Intentional BUG) Not handling this a standard way, so rejects other case variations (sPUD, spuD, spUd, etc.)
 		// (Intentional BUG) Doesn't prevent SQL injections, XSS, etc. (not that I know how yet, lol)
-		if ((input2.equals("Ted")) || (input2.equals("ted")) || (input2.equals("TED")) || (input2.equals("")) || (input2.startsWith("Ted"))) {
+		if ((input2.equals("Spud")) || (input2.equals("spud")) || (input2.equals("SPUD")) ||  (input2.startsWith("Spud"))) {
 			isLoginCorrect = true;
 		} else {
 			isLoginCorrect = false;
@@ -111,7 +112,7 @@ public class Login extends JPanel implements ActionListener {
 	}
 
 	// need to doublecheck this code
-	private static boolean isLoginEmpty(String input2) {
+	public static boolean isLoginEmpty(String input2) {
 		boolean isLoginEmpty = false;
 
 		if (input2.equals("")) {
@@ -124,8 +125,8 @@ public class Login extends JPanel implements ActionListener {
 
 	}
 
-	// weird way to handle the password, I know; works for for now though
-	private static boolean isPasswordCorrect(char[] input) {
+	
+	public static boolean isPasswordCorrect(char[] input) {
 		boolean isCorrect = true;
 		char[] correctPassword = { 'm', 'o', 'n', 'k', 'e', 'y' }; 
 
@@ -141,6 +142,8 @@ public class Login extends JPanel implements ActionListener {
 }
 
 //  OTHER VALID BUGS (if anyone happens to mention them):
+//  - Login dialog box doesn't close or go anywhere
 //  - (Usability) How the dialog box pulls up in odd places on the screen
-//  - (Usability) How it doesn't really log you in
+//  - (Usability) How it doesn't really log you in (tho they may not report this since it's just a tryout app)
+//  - Login dialog box doesn't close or go anywhere (  "
 //  - (Usability) Doesn't have standards like "Forgot Password" etc.
